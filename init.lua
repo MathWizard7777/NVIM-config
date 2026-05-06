@@ -5,6 +5,8 @@ vim.g.maplocalleader = ' '
 require('core.options')
 require('core.keymaps')
 
+require('custom.comp-connect')
+
 -- Diagnostic Config & Keymaps
 vim.diagnostic.config {
   update_in_insert = false,
