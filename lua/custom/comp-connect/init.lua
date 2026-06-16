@@ -1,9 +1,7 @@
 local uv = vim.loop
 
-print("entered comp-connect init file")
 
 local function start_competitive_server()
-  print("starting competetive server")
   local server = uv.new_tcp()
   local port = 27121
 
@@ -16,16 +14,12 @@ local function start_competitive_server()
     
     local request_data = ""
 
-    print("listening?!")
-    
     client:read_start(function(read_err, chunk)
       if read_err then return end
       
       if chunk then
         request_data = request_data .. chunk
 
-        print("got data?!!")
-        
         -- Check if we received the full HTTP request (ends with double CRLF if no body, 
         -- but we need to ensure the body is fully received for POST)
         if string.find(request_data, "\r\n\r\n") then
