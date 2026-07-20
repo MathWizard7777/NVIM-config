@@ -67,15 +67,18 @@ return {
   {
     "nvim-telescope/telescope.nvim",
     dependencies = {
-      { 
+      {
         "biozz/whop.nvim",
         config = function()
           require("whop").setup({
             builtin_commands = true,
-            keymap = "<leader>W",
+            keymap = "<leader>ww",
           })
         end
       }
+    },
+    keys = {
+      { "<leader>tw", ":Telescope whop<CR>", desc = "whop.nvim (telescope)" },
     },
     config = function()
       local telescope = require("telescope")
@@ -83,12 +86,11 @@ return {
         -- other config options
         extensions = {
           whop = {
-            preview_buffer_line_limit = 1000, -- default is 1000
+            preview_buffer_line_limit = 1000,
           }
         }
       })
       telescope.load_extension("whop")
-      vim.keymap.set("n", "<leader>tw", ":Telescope whop<CR>", { noremap = true, desc = "whop.nvim (telescope)" })
     end
-  },
+  }
 }
