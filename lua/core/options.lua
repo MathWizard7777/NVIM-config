@@ -53,3 +53,28 @@ vim.o.scrolloff = 10
 -- if performing an operation that would fail due to unsaved changes in the buffer (like `:q`),
 -- instead raise a dialog asking if you wish to save the current file(s)
 vim.o.confirm = true
+
+-- Create a group so commands don't duplicate on reload
+local indent_group = vim.api.nvim_create_augroup("LanguageIndent", { clear = true })
+
+-- 2-space languages
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "javascript", "typescript", "json", "yaml", "html", "css", "lua" },
+  group = indent_group,
+  callback = function()
+    vim.opt_local.shiftwidth = 2
+    vim.opt_local.tabstop = 2
+    vim.opt_local.softtabstop = 2
+  end,
+})
+
+-- 4-space languages
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "python", "rust", "c", "cpp" },
+  group = indent_group,
+  callback = function()
+    vim.opt_local.shiftwidth = 4
+    vim.opt_local.tabstop = 4
+    vim.opt_local.softtabstop = 4
+  end,
+})

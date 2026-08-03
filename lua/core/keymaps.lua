@@ -42,6 +42,8 @@ Map({'n', 'v'}, '<leader>p', '"+p')
 Map('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 Map('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
+-- Telescope
+
 -- Clear highlights on search when pressing <Esc> in normal mode
 Map('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
