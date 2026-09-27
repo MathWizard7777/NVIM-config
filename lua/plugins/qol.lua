@@ -69,4 +69,42 @@ return {
         hl(0, "MultiCursorDisabledSign", { link = "SignColumn"})
     end
   },
+  {
+    "tpope/vim-fugitive",
+
+    cmd = {
+      "Git",
+      "Gdiffsplit",
+      "Gvdiffsplit",
+      "Gread",
+      "Gwrite",
+      "Gbrowse",
+    },
+
+    keys = {
+      { "<leader>gs", "<cmd>Git<cr>", desc = "Git Status" },
+      { "<leader>gb", "<cmd>Git blame<cr>", desc = "Git Blame" },
+      { "<leader>gd", "<cmd>Gdiffsplit<cr>", desc = "Git Diff Split" },
+    },
+
+    init = function()
+      vim.api.nvim_create_user_command("G", function(opts)
+        -- Force-load fugitive first
+        require("lazy").load({ plugins = { "vim-fugitive" } })
+
+        local cmd = "Git"
+        if opts.bang then
+          cmd = cmd .. "!"
+        end
+        if opts.args ~= "" then
+          cmd = cmd .. " " .. opts.args
+        end
+
+        vim.cmd(cmd)
+      end, {
+        nargs = "*",
+        bang = true,
+      })
+    end,
+  },
 }
